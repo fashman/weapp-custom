@@ -1,0 +1,456 @@
+<!--detail.wxml-->
+<import src="../../templates/poi/index.wxml"/>
+<import src="../../templates/alert/index.wxml"/>
+<import src="../../templates/author/index.wxml"/>
+<import src="../../templates/consult/index.wxml"/>
+<import src="../../templates/tel/index.wxml"/>
+<import src="../../templates/success/index.wxml"/>
+<import src="../../templates/error/index.wxml"/>
+
+<block wx:if="{{!isloading}}">
+  <view class="banner">
+    <swiper
+      indicator-dots="true"
+      autoplay="true"
+      interval="5000"
+      duration="1000"
+      indicator-color="rgba(255, 255, 255, .3)"
+      indicator-active-color="#fff"
+      circular="true"
+    >
+      <block wx:for="{{detail.images}}" wx:key="*this">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" height="750"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="text">
+      <view class="h2">
+        <text>{{detail && detail.title ? detail.title : '未知'}}</text>
+      </view>
+      <view class="h3">
+        <text>￥<text>{{detail && detail.price ? detail.price : '未知' }}</text>/人起</text>
+      </view>
+      <view class="tag">
+        <view class="date">
+          <image src="../../images/date.png" />
+          <text>{{detail && detail.duration ? detail.duration : 'N天N夜' }}</text>
+        </view>
+        <view class="comment">
+          <image src="../../images/comment.png" />
+          <text>{{detail && detail.score ? detail.score * 100 : 100}}%好评</text>
+        </view>
+        <view class="why" bindtap="showAlertTempl">
+          <image src="../../images/why.png" />
+          <text>二次确认</text>
+        </view>
+      </view>
+    </view>
+    <view class="line">
+      <image src="../../images/line.jpg" height="30" />
+    </view>
+  </view>
+  <!-- 亮点展现 -->
+  <view class="highlight">
+    <block wx:if="{{detail && detail.lights && detail.lights.length}}">
+      <view class="inbox">
+        <view class="tit">
+          <image src="../../images/highlight.png" />
+          <text>亮点展现</text>
+        </view>
+        <view class="tab-nav">
+          <block wx:for="{{detail.lights}}" wx:for-item="item" wx:key="*this">
+            <view data-key="highlightTab" data-value="{{index}}" bindtap="handleTab" class="{{highlightTab == index ? 'cur' : ''}}">
+              <text>{{item.name || ''}}</text>
+              <image src="../../images/arrow-down.png" height="12" />
+            </view>
+          </block>
+        </view>
+        <block wx:for="{{detail.lights}}" wx:for-item="val" wx:for-index="ind" wx:key="*this">
+          <block wx:if="{{highlightTab == ind}}">
+            <view>
+              <block wx:for="{{val.body}}" wx:for-item="v" wx:for-index="i" wx:key="*this">
+                <view class="h3">
+                  <text>{{v.title || ''}}</text>
+                </view>
+                <view class="text">
+                  <view>
+                    <text>{{v.content}}</text>
+                  </view>
+                </view>
+                <block wx:for="{{v.imgs}}" wx:for-item="imgsItem" wx:key="*this">
+                  <image class="max-img" height="414" src="{{imgsItem}}" />
+                </block>
+                <block wx:if="{{i != val.body.length - 1}}">
+                  <view class="border"></view>
+                </block>
+              </block>
+            </view>
+          </block>
+        </block>
+      </view>
+      <view class="line">
+        <image src="../../images/line.jpg" height="30"/>
+      </view>
+    </block>
+  </view>
+  <!-- 地图 -->
+  <view class="map">
+    <block wx:if="{{detail.lineImage}}">
+      <view class="inbox">
+        <view class="tit">
+          <image src="../../images/map.png" />
+          <text>行程地图</text>
+        </view>
+        <image mode="widthFix" src="{{detail.lineImage}}" />
+      </view>
+      <view class="line">
+        <image src="../../images/line.jpg"  height="30"/>
+      </view>
+    </block>
+  </view>
+  <!-- 行程安排 -->
+  <view class="trip">
+    <view class="inbox">
+      <view class="tit">
+        <image src="../../images/trip.png" />
+        <text>行程安排</text>
+      </view>
+      <view class="tab-nav">
+        <view data-key="trvalTab" data-value="1" bindtap="handleTab" class="{{trvalTab == 1 ? 'cur' : ''}}">
+          <text>详情</text>
+          <image src="../../images/arrow-down.png" height="12" />
+        </view>
+        <view data-key="trvalTab" data-value="2" bindtap="handleTab" class="{{trvalTab == 2 ? 'cur' : ''}}">
+          <text>概览</text>
+          <image src="../../images/arrow-down.png" height="12" />
+        </view>
+      </view>
+      <block wx:if="{{trvalTab == 1}}">
+        <view>
+          <block wx:for="{{schedule && schedule.details ? schedule.details : []}}" wx:key="*this">
+            <view class="day">
+              <view class="left">
+                <image src="../../images/lock.png" />
+                <text>DAY {{index + 1}}</text>
+              </view>
+              <view class="right">
+                <text class="bold">{{item.title || ''}}</text>
+              </view>
+            </view>
+            <view class="day-info">
+              <view class="attraction">
+                <block wx:for="{{item.scenes || []}}" wx:key="*this" wx:for-item="attractionItem" wx:for-index="attractionIndex">
+                  <view class="attraction-item">
+                    <image src="../../images/star.png" height="20" />
+                    <text>{{attractionItem}}</text>
+                  </view>
+                  <block wx:if="{{attractionIndex != item.scenes.length -1}}">
+                    <view class="attraction-item">
+                      <text class="spot">···</text>
+                    </view>
+                  </block>
+                </block>
+              </view>
+              <view class="text">
+                <text>{{item.desc || ''}}</text>
+              </view>
+              <block wx:if="{{item.images && item.images.length}}">
+                <block wx:for="{{item.images}}" wx:key="*this" wx:for-item="imagesItem">
+                  <image class="max-img" height="414" src="{{imagesItem}}" />
+                </block>
+              </block>
+              <block wx:for="{{item.plays}}" wx:key="*this" wx:for-item="playsItem">
+                <view class="spots-item" data-data="{{playsItem}}" bindtap="showPoiTempl">
+                  <image src="../../images/spot.png" height="33" />
+                  <view>
+                    <text>{{playsItem.name}}</text>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </block>
+        </view>
+      </block>
+      <block wx:if="{{trvalTab == 2}}">
+        <view>
+          <view class="overview">
+            <view class="overview-box verview-box-first">
+              <view class="overview-h3">
+                <text>参考航班</text>
+              </view>
+              <view class="overview-span overview-span8">
+                <block wx:for="{{schedule && schedule.flights ? schedule.flights : []}}" wx:key="*this" wx:for-item="flightsItem" wx:for-index="flightsIndex">
+                  <view>
+                    <block wx:if="{{flightsIndex == 0}}">
+                      <text class="blod">去程：</text>
+                    </block>
+                    <block wx:elif="{{flightsIndex == schedule.flights.length - 1}}">
+                        <text class="blod">返程：</text>
+                    </block>
+                    <block wx:else>
+                      <text class="blod">航班{{flightsIndex}}：</text>
+                    </block>
+                    <block wx:if="{{flightsItem.num}}">
+                      <text class="mr30">{{flightsItem.num}}</text>
+                    </block>
+                    <block wx:if="{{flightsItem.fromLoc}}">
+                      <text >{{flightsItem.fromLoc || '未知'}}({{flightsItem.fromTime || '未知'}})</text>
+                    </block>
+                    <text >-</text>
+                    <block wx:if="{{flightsItem.toLoc}}">
+                      <text class="mr30">{{flightsItem.toLoc || '未知'}}({{flightsItem.toTime || '未知'}}{{flightsItem.crossDay ? ' +' + flightsItem.crossDay : ''}})</text>
+                    </block>
+                    <block wx:if="{{flightsItem.duration}}">
+                      <text class="mr30">飞行{{flightsItem.duration || '未知'}}小时</text>
+                    </block>
+                    <block wx:if="{{flightsItem.model}}">
+                      <text class="mr30">{{flightsItem.model||'未知'}}</text>
+                    </block>
+                  </view>
+                </block>
+                <view>
+                  <text class="ccc">注：参考时间以当地时间为准</text>
+                </view>
+              </view>
+            </view>
+            <view class="overview-box overview-box-last">
+              <view class="overview-span overview-span1 center">
+                <text class="th">日程</text>
+              </view>
+              <view class="overview-span overview-span2 bd center">
+                <text class="th">地点</text>
+              </view>
+              <view class="overview-span overview-span3 bd center">
+                <text class="th">游玩信息</text>
+              </view>
+              <view class="overview-span overview-span3 bd center">
+                <text class="th">住宿信息</text>
+              </view>
+            </view>
+            <block wx:for="{{schedule && schedule.overviews ? schedule.overviews : []}}" wx:key="*this" wx:for-item="overviewsItem" wx:for-index="overviewsIndex">
+              <view class="overview-box overview-box-last">
+                <view class="overview-span overview-span1">
+                  <text class="th crcenter">DAY {{overviewsIndex + 1}}</text>
+                </view>
+                <view class="overview-span overview-span2 bd">
+                  <block wx:if="{{overviewsItem.location && overviewsItem.location.length}}">
+                    <block wx:for="{{overviewsItem.location || []}}" wx:key="*this" wx:for-item="locationItem" wx:for-index="locationIndex">
+                      <view>
+                        <text>{{locationIndex + 1}}.{{locationItem}}</text>
+                      </view>
+                    </block>
+                  </block>
+                  <block wx:else>
+                    <text>无地点信息</text>
+                  </block>
+                </view>
+                <view class="overview-span overview-span3 bd">
+                  <block wx:if="{{overviewsItem.scenes && overviewsItem.scenes.length}}">
+                    <block wx:for="{{overviewsItem.scenes || []}}" wx:key="*this" wx:for-item="scenesItem" wx:for-index="scenesIndex">
+                      <view>
+                        <text>{{scenesIndex + 1}}.{{scenesItem}}</text>
+                      </view>
+                    </block>
+                  </block>
+                  <block wx:else>
+                    <text>无游玩信息</text>
+                  </block>
+                </view>
+                <view class="overview-span overview-span3 bd">
+                  <block wx:if="{{overviewsItem.hotels && overviewsItem.hotels.length}}">
+                    <block wx:for="{{overviewsItem.hotels || []}}" wx:key="*this" wx:for-item="hotelsItem" wx:for-index="hotelsIndex">
+                      <view>
+                        <text>{{hotelsItem}}</text>
+                      </view>
+                    </block>
+                  </block>
+                  <block wx:else>
+                    <text>无住宿信息</text>
+                  </block>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="line">
+      <image src="../../images/line.jpg" height="30"/>
+    </view>
+  </view>
+
+  <view class="other">
+    <view class="tit">
+      <image src="../../images/other.png" />
+      <text>其他说明</text>
+    </view>
+    <view class="other-item">
+      <view class="h3" data-key="showCost" bindtap="toggleTap">
+        <image class="icon" src="../../images/cost.png" />
+        <text>费用详情</text>
+        <image class="arrow {{showCost ? 'down' : ''}}" src="../../images/arrow.png" />
+      </view>
+      <block wx:if="{{showCost}}">
+        <view class="dotted"></view>
+        <view class="h4">
+          <text>费用包含</text>
+        </view>
+        <view class="text">
+          <text>{{detail.expensesInclude || '无费用包含信息'}}</text>
+        </view>
+        <view class="dotted"></view>
+        <view class="h4">
+          <text>费用不包含</text>
+        </view>
+        <view class="text">
+          <text>{{detail.expensesExclude || '无费用不包含信息'}}</text>
+        </view>
+      </block>
+    </view>
+    <view class="other-item">
+      <view class="h3" data-key="showNotice" bindtap="toggleTap">
+        <image class="icon" src="../../images/notice.png" />
+        <text>预定须知</text>
+        <image class="arrow {{showNotice ? 'down' : ''}}" src="../../images/arrow.png" />
+      </view>
+      <block wx:if="{{showNotice}}">
+        <view class="dotted"></view>
+        <view class="h4">
+          <text>预定流程</text>
+        </view>
+        <view class="text">
+          <text>精选线路方案</text>
+          <image src="../../images/arrow-double.png" />
+          <text>联系沟通需求</text>
+          <image src="../../images/arrow-double.png" />
+          <text>定制顾问报价</text>
+          <image src="../../images/arrow-double.png" />
+        </view>
+        <view class="text">
+          <text>签订合同付款</text>
+          <image src="../../images/arrow-double.png" />
+          <text>发送行程路书</text>
+          <image src="../../images/arrow-double.png" />
+          <text>行中管家服务</text>
+          <image src="../../images/arrow-double.png" />
+        </view>
+        <view class="text">
+          <text>行程愉快结束</text>
+        </view>
+        <view class="dotted"></view>
+        <view class="h4">
+          <text>退改规则</text>
+        </view>
+        <view class="text">
+          <text>因定制游为非标准产品，退改规则以最终签订合同为准，敬请谅解。</text>
+        </view>
+        <view class="dotted"></view>
+        <view class="h4">
+          <text>人员限制</text>
+        </view>
+        <view class="text">
+          <text>{{detail.personLimit || '无'}}</text>
+        </view>
+        <view class="dotted"></view>
+        <view class="h4">
+          <text>其他提示</text>
+        </view>
+        <view class="text">
+          <text>{{detail.warmTips || '无'}}</text>
+        </view>
+      </block>
+    </view>
+    <view class="other-item">
+      <view class="h3" data-key="showVisa" bindtap="toggleTap">
+        <image class="icon" src="../../images/visa.png" />
+        <text>签证信息</text>
+        <image class="arrow {{showVisa ? 'down' : ''}}" src="../../images/arrow.png" />
+      </view>
+      <block wx:if="{{showVisa}}">
+        <view class="dotted"></view>
+        <view class="h4">
+          <text>{{detail.visaInfo.country}}个人旅游签证</text>
+        </view>
+        <view class="text">
+          <text>办理周期：{{detail.visaInfo.timeCost || '未知'}}（收齐资料之日起,节假日顺延）</text>
+        </view>
+        <view class="text">
+          <text>{{detail.visaInfo.interview || '未知'}}</text>
+        </view>
+        <view class="text">
+          <text>可停留天数：不超过{{detail.visaInfo.timeOfStay || '未知'}}</text>
+        </view>
+        <view class="text">
+          <text>入境次数：{{detail.visaInfo.timesOfEntry || '未知'}}</text>
+        </view>
+        <view class="text">
+          <text>签证有效期：{{detail.visaInfo.expiryDate || '未知'}}</text>
+        </view>
+        <view class="text">
+          <text>注意事项：{{detail.visaInfo.tips || '未知'}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="consult">
+    <view class="online">
+      <view>
+        <image src="../../images/online-icon.png" width="42" height="42" />
+        <text>在线咨询</text>
+      </view>
+      <button open-type="contact">进入客服会话</button>
+    </view>
+    <view class="tel" bindtap="showTelTempl">
+      <image src="../../images/tel-icon.png" width="40" height="40" />
+    </view>
+  </view>
+  <block wx:if="{{curIndex !== null}}">
+    <view class="fixNav">
+      <view data-value="0" data-key="curIndex" bindtap="handlClick" class="{{curIndex === 0 ? 'cur' : ''}}">
+        <image class="a" src="../../images/fix01.png" />
+        <text>亮点</text>
+      </view>
+      <view data-value="1" data-key="curIndex" bindtap="handlClick" class="{{curIndex === 1 ? 'cur' : ''}}">
+        <image class="b" src="../../images/fix02.png" />
+        <text>地图</text>
+      </view>
+      <view data-value="2" data-key="curIndex" bindtap="handlClick" class="{{curIndex === 2 ? 'cur' : ''}}">
+        <image class="c" src="../../images/fix03.png" />
+        <text>行程</text>
+      </view>
+      <view data-value="3" data-key="curIndex" bindtap="handlClick" class="{{curIndex === 3 ? 'cur' : ''}}">
+        <image class="d" src="../../images/fix04.png" />
+        <text>其他</text>
+      </view>
+    </view>
+  </block>
+</block>
+<!-- poi 介绍弹层 -->
+<block wx:if="{{isShowPoi}}">
+  <template is="poiTempl" data="{{poiData}}" />
+</block>
+<!-- 二次确认弹层 -->
+<block wx:if="{{isShowAlert}}">
+  <template is="Alert" />
+</block>
+<!-- 授权弹层 -->
+<block wx:if="{{!hasUserInfo}}">
+  <template is="Author" />
+</block>
+<!-- 客服弹层 -->
+<block wx:if="{{isShowConsult}}">
+  <template is="consultTempl" data="{{selectPhoneIndex, hideConsultClass}}"/>
+</block>
+<!-- 电话弹层 -->
+<block wx:if="{{isShowTel}}">
+  <template is="telTempl" data="{{hideTelClass}}"/>
+</block>
+<!-- 表单提示成功弹层 -->
+<block wx:if="{{isShowSuccess}}">
+  <template is="successTempl"/>
+</block>
+<!-- 表单提示失败弹层 -->
+<block wx:if="{{isShowError}}">
+  <template is="errorTempl" data="{{errorMsg}}"/>
+</block>

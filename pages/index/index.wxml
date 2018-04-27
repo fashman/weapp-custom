@@ -1,0 +1,73 @@
+<import src="../../templates/success/index.wxml"/>
+<import src="../../templates/error/index.wxml"/>
+<wxs src="../../utils/phoneCheck.wxs" module="phoneCheck" />
+
+<view class="index">
+  <!-- 标题 -->
+  <view class="index-title">
+    <view>来 一 次 你 的</view>
+    <view class="h3">
+      <view>
+        <text>专</text>
+        <text>属</text>
+      </view>
+      <view>
+        <text>旅</text>
+        <text>程</text>
+      </view>
+    </view>
+  </view>
+  <!-- 表单 -->
+  <form bindsubmit="formSubmit">
+    <view class="index-form">
+      <view class="group">
+        <image class="where" src="../../images/index/where.png" />
+        <input name="destinations" value="{{destinations}}" placeholder="去哪儿玩" />
+      </view>
+      <view class="group">
+          <image class="who" src="../../images/index/who.png" />
+          <input name="peopleNums" value="{{peopleNums}}" type="number" placeholder="出行人数" />
+        </view>
+        <view class="group">
+          <image class="date" src="../../images/index/date.png" />
+          <input name="duration" value="{{duration}}" type="number" placeholder="旅游天数" />
+        </view>
+        <view class="group">
+          <picker class="picker" bindchange="phoneTypeChange" value="{{selectPhoneIndex}}" range="{{phoneCheck.phoneLabelRange}}">
+            <view>
+              +{{phoneCheck.phoneKeyRange[selectPhoneIndex][2]}}
+              ({{phoneCheck.phoneKeyRange[selectPhoneIndex][1]}})
+            </view>
+            <image src="../../images/index/down.png" />
+          </picker>
+          <view class="input">
+            <input name="mobile" value="{{mobile}}" placeholder="手机号" type="number" maxlength="-1"/>
+            <view class="line"></view>
+          </view>
+          <view class="hide">
+            <input name="check" value="{{phoneCheck.phoneKeyRange[selectPhoneIndex]}}" />
+            <input name="remark" value="" />
+          </view>
+        </view>
+    </view>
+    <button class="submit" form-type="submit">提交需求</button>
+  </form>
+  <!-- 底部 -->
+  <view class="index-footer">
+    <view>为什么选择我趣定制游？</view>
+    <view>
+      <text>10秒提需求</text>  
+      <text>1小时与您联系</text>
+      <text>12小时获得专属方案</text>
+    </view>
+  </view>
+</view>
+
+<!-- 表单提示成功弹层 -->
+<block wx:if="{{isShowSuccess}}">
+  <template is="successTempl"/>
+</block>
+<!-- 表单提示失败弹层 -->
+<block wx:if="{{isShowError}}">
+  <template is="errorTempl" data="{{errorMsg}}"/>
+</block>

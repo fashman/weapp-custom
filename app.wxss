@@ -1,0 +1,15 @@
+/**app.wxss**/
+page {
+  font-family: 'Microsoft YaHei';
+  box-sizing: border-box;
+  color: #333;
+}
+
+.line {
+  height: 30rpx;
+}
+.line image {
+  display: block;
+  height: 30rpx;
+  width: 100%;
+}

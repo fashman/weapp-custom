@@ -1,0 +1,30 @@
+var phoneLabelRange = [
+  '中国', '美国', '加拿大', '澳大利亚', '新西兰', '香港', '澳门', '台湾', '英国',
+   '法国', '德国', '比利时', '意大利', '西班牙', '瑞士', '荷兰', '希腊', '挪威', '马来西亚'
+];
+var phoneKeyRange = [
+  ['mobileCN','中国','86'],
+  ['mobileUSA','美国','1'],
+  ['mobileCAD','加拿大','1'],
+  ['mobileAUD','澳大利亚','61'],
+  ['mobileNZD','新西兰','64'],
+  ['mobileHK','香港','852'],
+  ['mobileMacau','澳门','853'],
+  ['mobileTW','台湾','886'],
+  ['mobileUK','英国','44'],
+  ['mobileFrance','法国','33'],
+  ['mobileGermany','德国','49'],
+  ['mobileBelgium','比利时','32'],
+  ['mobileItaly','意大利','39'],
+  ['mobileSpain','西班牙','34'],
+  ['mobileSwiss','瑞士','41'],
+  ['mobileHolland','荷兰','31'],
+  ['mobileGreece','希腊','30'],
+  ['mobileNorway','挪威','47'],
+  ['mobileMalaysia','马来西亚','0060']
+];
+
+module.exports = {
+  phoneLabelRange: phoneLabelRange,
+  phoneKeyRange: phoneKeyRange
+};

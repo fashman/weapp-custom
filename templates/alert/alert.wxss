@@ -1,0 +1,6 @@
+.modal-detail .infos-wrap .h3 {
+  text-align: center;
+  color: #333333;
+  font-size: 36rpx;
+  margin-bottom: 30rpx;
+}

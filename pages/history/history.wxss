@@ -1,0 +1,96 @@
+@import '../../templates/author/index.wxss';
+
+page {
+  background-color: #f1f2ed;
+}
+.list {
+  padding-bottom: 60rpx;
+}
+.list-group {
+  background-color: #fff;
+  margin-bottom: 30rpx;
+}
+.image-wrap {
+  width: 100%;
+  height: 750rpx;
+}
+.image-wrap image {
+  display: block;
+  width: 100%;
+  height: 750rpx;
+}
+
+.text-wrap {
+  padding: 30rpx;
+}
+.text-wrap .h2 {
+  font-size: 32rpx;
+  line-height: 50rpx;
+  margin-bottom: 20rpx;
+}
+.text-wrap .h3 {
+  color: #f08300;
+  font-size: 24rpx;
+  float: left;
+}
+.text-wrap .h3 text text {
+  font-size: 42rpx;
+  font-weight: 700;
+}
+
+.tag {
+  overflow: hidden;
+  color: #848484;
+  font-size: 26rpx;
+  text-align: right;
+  padding-top: 15rpx;
+}
+.tag .comment {
+  display: inline-block;
+}
+.tag .comment image {
+  width: 21rpx;
+  height: 20rpx;
+  margin-right: 10rpx;
+  position: relative;
+  top: 2rpx;
+}
+.tag .date {
+  display: inline-block;
+  margin-right: 30rpx;
+}
+.tag .date image {
+  width: 21rpx;
+  height: 20rpx;
+  margin-right: 10rpx;
+}
+
+.line {
+  height: 30rpx;
+}
+.line image {
+  width: 100%;
+  height: 30rpx;
+}
+
+.nodata {
+  width: 100%;
+  height: 100%;
+  background-color: #f1f2ed;
+}
+.nodata image {
+  width: 350rpx;
+  height: 418rpx;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -70%);
+}
+
+.is-bottom {
+  height: 30rpx;
+  line-height: 30rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #b2b2b2;
+}

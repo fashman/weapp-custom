@@ -1,0 +1,33 @@
+.author-modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .3);
+}
+.author-wrap {
+  width: 60%;
+  background-color: #fff;
+  border-radius: 6rpx;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translate(0, -50%);
+  overflow: hidden;
+}
+
+.author-text {
+  font-size: 30rpx;
+  line-height: 40rpx;
+  padding: 40rpx 20rpx;
+} 
+
+.author-btn {
+  font-size: 40rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #fff;
+  background-color: #f08300;
+}

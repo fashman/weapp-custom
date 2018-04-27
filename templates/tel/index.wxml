@@ -1,0 +1,24 @@
+<template name="telTempl">
+  <view class="tel-template">
+    <view class="info {{hideTelClass || ''}}">
+      <view class="title">
+        <text>7*24小时为您服务</text>
+      </view>
+      <view class="content">
+        <view bindtap="tapToCall" data-phone="400-661-5757">
+          <text class="tit">中国本地</text>
+          <text>400-661-5757</text>
+          <image src="../../images/arrow.png" />
+        </view>
+        <view bindtap="tapToCall" data-phone="86-755-3667-7780">
+          <text class="tit">国际通用</text>
+          <text>86-755-3667-7780</text>
+          <image src="../../images/arrow.png" />
+        </view>
+      </view>
+      <view class="cancel" bindtap="hideTelTempl">
+        <text>取消</text>
+      </view>
+    </view>
+  </view>
+</template>

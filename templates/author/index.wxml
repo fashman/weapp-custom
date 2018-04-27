@@ -1,0 +1,12 @@
+<template name="Author">
+  <view class="author-modal">
+    <view class="author-wrap">
+      <view class="author-text">
+        <text>需要授权才能查看！</text>
+      </view>
+      <view class="author-btn" bindtap="authorSetting">
+        <text>现在授权</text>
+      </view>
+    </view>
+  </view>
+</template>

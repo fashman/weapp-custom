@@ -1,0 +1,30 @@
+<template name="poiTempl">
+  <view class="modal-detail">
+    <view class="modal-wrap">
+      <view class="content-wrap">
+        <view class="tit-wrap">
+          <text>{{poiData.name || '没有标题'}}</text>
+        </view>
+        <view class="image-wrap">
+          <block wx:if="{{poiData.image}}">
+            <image mode="widthFix" src="{{poiData.image}}" />
+          </block>
+        </view>
+        <view class="infos-wrap">
+          <view class="quote">
+            <image src="../../images/quote-l.png" />
+          </view>
+          <view class="text">
+            <text>{{poiData.desc || '没有描述'}}</text>
+          </view>
+          <view class="quote quote-r">
+              <image src="../../images/quote-r.png" />
+          </view>
+        </view>
+      </view>
+      <view class="close-btn" bindtap="hidePoiTempl">
+        <image src="../../images/close.png" />
+      </view>
+    </view>
+  </view>
+</template>

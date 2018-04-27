@@ -1,0 +1,140 @@
+@import '../../templates/success/index.wxss';
+@import '../../templates/error/index.wxss';
+
+page {
+  background: #f1f2ed url('https://www.quimg.com/fixed/consult/bg.jpg') no-repeat center;
+  background-size: cover;
+}
+/* 标题 */
+.index-title {
+  font-size: 60rpx;
+  color: #fff;
+  text-align: center;
+  margin: 120rpx auto 80rpx;
+}
+.index-title .h3 {
+  font-size: 40rpx;
+  margin-top: 10rpx;
+}
+.index-title .h3 view {
+  display: inline-block;
+  padding: 10rpx 15rpx 0;
+  border-top: 1px solid #fff;
+}
+.index-title .h3 view:first-child {
+  margin-right: 30rpx;
+  position: relative;
+}
+.index-title .h3 view:first-child:after {
+  content: ' ';
+  position: absolute;
+  top: -3rpx;
+  right: -15rpx;
+  width: 6rpx;
+  height: 6rpx;
+  background-color: #fff;
+  border-radius: 50%;
+}
+.index-title .h3 view text {
+  margin-right: 60rpx;
+}
+.index-title .h3 view text:last-child {
+  margin-right: 0;
+}
+
+/* 表单 */
+.index-form {
+  margin: 0 30rpx 25rpx;
+  padding: 0 30rpx;
+  background-color: rgba(255, 255, 255, .8);
+  border-radius: 10rpx;
+}
+.index-form .group {
+  height: 94rpx;
+  line-height: 94rpx;
+  border-bottom: 1px solid #848484;
+}
+.index-form .group:last-child {
+  border-bottom: 0;
+}
+.index-form .group image {
+  float: left;
+}
+.index-form .group .where {
+  width: 26rpx;
+  height: 27rpx;
+  padding-top: 33rpx;
+}
+.index-form .group .who {
+  width: 30rpx;
+  height: 24rpx;
+  padding-top: 35rpx;
+}
+.index-form .group .date {
+  width: 28rpx;
+  height: 30rpx;
+  padding-top: 32rpx;
+}
+.index-form .group input {
+  display: block;
+  margin-left: 30rpx;
+  padding: 0;
+  line-height: 94rpx;
+  height: 94rpx;
+  font-size: 28rpx;
+}
+
+.index-form .picker {
+  width: 265rpx;
+  height:  94rpx;
+  line-height: 94rpx;
+  font-size: 28rpx;
+  position: relative;
+  float: left;
+}
+.index-form .picker image {
+  width: 28rpx;
+  height: 16rpx;
+  position: absolute;
+  top: 39rpx;
+  right: 30rpx;
+}
+.index-form .input {
+  margin-left: 265rpx;
+  height: 94rpx;
+  position: relative;
+}
+.index-form .input .line {
+  position: absolute;
+  top: 35rpx;
+  left: 0;
+  height: 24rpx;
+  border-left: 1px solid #848484;
+}
+
+.submit {
+  height: 94rpx;
+  background-color: #f08300;
+  color: #fff;
+  margin: 0 30rpx 100rpx;
+  font-size: 30rpx;
+  line-height: 94rpx;
+}
+
+/* 底部 */
+.index-footer {
+  font-size: 30rpx;
+  color: #fff;
+  line-height: 50rpx;
+  text-align: center;
+}
+.index-footer view:last-child {
+  font-size: 26rpx;
+}
+.index-footer text {
+  padding: 0 8rpx;
+}
+
+.hide {
+  display: none;
+}

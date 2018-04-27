@@ -1,0 +1,10 @@
+<template name="successTempl">
+  <view class="success-template">
+    <view class="info">
+      <image src="../../images/success.png" />
+      <view>
+        <text>提交成功，我们会尽快与您联系</text>
+      </view>
+    </view>
+  </view>
+</template>

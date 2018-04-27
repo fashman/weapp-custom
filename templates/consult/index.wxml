@@ -1,0 +1,37 @@
+<wxs src="../../utils/phoneCheck.wxs" module="phoneCheck" />
+
+<template name="consultTempl">
+  <view class="consult-template">
+    <view class="consult-info {{hideConsultClass || ''}}">
+      <form bindsubmit="formSubmit">
+        <view class="close">
+          <image src="../../images/close2.png" bindtap="hideConsultTempl"/>
+        </view>
+        <view class="title">
+          <view>
+            <text>对行程有疑问？想定制此行程？</text>
+          </view>
+          <view class="span">
+            <text>只需留下电话，定制师会与你联系</text>
+          </view>
+        </view>
+        <view class="phone">
+          <picker class="picker" bindchange="phoneTypeChange" value="{{selectPhoneIndex || 0}}" range="{{phoneCheck.phoneLabelRange}}">
+            <view>
+              +{{phoneCheck.phoneKeyRange[selectPhoneIndex || 0][2]}}
+              ({{phoneCheck.phoneKeyRange[selectPhoneIndex || 0][1]}})
+            </view>
+          </picker>
+          <view class="input">
+            <input name="phone" placeholder="手机号" type="number" maxlength="-1"/>
+            <view class="line"></view>
+          </view>
+        </view>
+        <view class="hide">
+          <input name="check" value="{{phoneCheck.phoneKeyRange[selectPhoneIndex || 0]}}" />
+        </view>
+        <button class="submit" form-type="submit">提交</button>
+      </form>
+    </view>
+  </view>
+</template>

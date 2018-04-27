@@ -1,0 +1,49 @@
+<import src="../../templates/author/index.wxml"/>
+
+<block wx:if="{{!isloading}}">
+  <view wx:if="{{list.length}}">
+    <view class="list">
+      <block wx:for="{{list}}" wx:key="item">
+        <navigator url="/pages/detail/detail?code={{item.code}}">
+          <view class="list-group">
+            <view class="image-wrap">
+              <image src="{{item.image}}" />
+            </view>
+            <view class="text-wrap">
+              <view class="h2">
+                <text>{{item.title}}</text>
+              </view>
+              <view class="h3">
+                <text>￥<text>{{item.price}}</text>/人起</text>
+              </view>
+              <view class="tag">
+                <view class="date">
+                  <image src="../../images/date.png" />
+                  <text>{{item.tags}}</text>
+                </view>
+                <view class="comment">
+                  <image src="../../images/comment.png" />
+                  <text>{{item.score * 100}}%好评</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </navigator>
+      </block>
+      <block wx:if="{{list.length > 1}}">
+        <view class="is-bottom">
+          <text>- 已经到底了，不要再扯了 -</text>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view wx:else>
+    <view class="nodata">
+      <image src="../../images/nodata.png" />
+    </view>
+  </view>
+</block>
+
+<block wx:if="{{!hasUserInfo}}">
+  <template is="Author" />
+</block>

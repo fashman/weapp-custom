@@ -1,0 +1,71 @@
+.modal-detail {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .3);
+  top: 0;
+  left: 0;
+}
+
+.modal-detail .modal-wrap {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+.modal-detail .content-wrap {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 50rpx 25rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.modal-detail .content-wrap .tit-wrap {
+  font-size: 30rpx;
+  line-height: 40rpx;
+  color: #00bb66;
+  margin-bottom: 20rpx;
+}
+
+.modal-detail .content-wrap .image-wrap {
+  width: 100%;
+  margin-bottom: 30rpx;
+}
+
+.modal-detail .content-wrap .image-wrap image {
+  display: block;
+  width: 100%;
+  border-radius: 10rpx;
+}
+
+.modal-detail .infos-wrap .quote-r {
+  text-align: right;
+}
+
+.modal-detail .infos-wrap .quote image {
+  width: 36rpx;
+  height: 27rpx;
+}
+
+.modal-detail .infos-wrap .text {
+  padding: 0 50rpx;
+  font-size: 26rpx;
+  color: #848484;
+  line-height: 42rpx;
+}
+
+.modal-detail .modal-wrap .close-btn {
+  width: 81rpx;
+  height: 81rpx;
+  margin: 40rpx auto 0;
+}
+
+.modal-detail .modal-wrap .close-btn image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

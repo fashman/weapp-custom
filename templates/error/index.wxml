@@ -1,0 +1,11 @@
+<template name="errorTempl">
+  <view class="error-template">
+    <view class="info">
+      <view class="title">提示</view>
+      <view class="text">
+        <text>{{errorMsg || '请输入正确的手机号'}}</text>
+      </view>
+      <view class="close" bindtap="closeErrorTempl">确定</view>
+    </view>
+  </view>
+</template>

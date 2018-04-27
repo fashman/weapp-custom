@@ -1,0 +1,19 @@
+<template name="Alert">
+  <view class="modal-detail">
+    <view class="modal-wrap">
+      <view class="content-wrap">
+        <view class="infos-wrap">
+          <view class="h3">
+            <text>什么是二次确认？</text>
+          </view>
+          <view class="text">
+            <text>因定制游产品的最终价格受到具体行程安排、出行日期、出行人数等因素的影响，因此需要与客服人员进行二次确认，敬请谅解，谢谢！</text>
+          </view>
+        </view>
+      </view>
+      <view class="close-btn" bindtap="hideAlertTempl">
+        <image src="../../images/close.png" />
+      </view>
+    </view>
+  </view>
+</template>
